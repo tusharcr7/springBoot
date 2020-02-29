@@ -7,6 +7,7 @@ public interface StackHolder {
 	public List<User> findAll();
 	public User save(User user);
 	public User findOne(int id);
+	public User deletOne(int id);
 	
 	
 }

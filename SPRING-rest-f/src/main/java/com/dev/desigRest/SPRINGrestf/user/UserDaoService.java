@@ -2,6 +2,7 @@ package com.dev.desigRest.SPRINGrestf.user;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -32,11 +33,11 @@ public class UserDaoService implements StackHolder {
 		if (user.getId() == null) {
 			user.setId(++usersCount);
 			users.add(user);
-			
+
 		} else {
 			users.add(user);
 		}
-      		return user;
+		return user;
 	}
 
 	public User findOne(int id) {
@@ -47,5 +48,23 @@ public class UserDaoService implements StackHolder {
 		return null;
 
 	}
+
+	public User deletOne(int id) {
+		Iterator<User> it = users.iterator();
+
+		while (it.hasNext()) {
+			User temp = it.next();
+			if (temp.getId() == id) {
+				it.remove();
+				return temp;
+			}
+
+		}
+
+		return null;
+
+	}
+
+	
 
 }
