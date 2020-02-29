@@ -31,10 +31,12 @@ public class UserDaoService implements StackHolder {
 	public User save(User user) {
 		if (user.getId() == null) {
 			user.setId(++usersCount);
+			users.add(user);
+			
 		} else {
 			users.add(user);
 		}
-		return user;
+      		return user;
 	}
 
 	public User findOne(int id) {
