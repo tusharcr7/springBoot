@@ -38,7 +38,7 @@ public class UserResource {
 		}
 
 		EntityModel<User> objEntityModelUser = new EntityModel<User>(og);
-		WebMvcLinkBuilder objwmvclinkbuild = linkTo(methodOn(this.getClass(), getAllUsers()));
+		WebMvcLinkBuilder objwmvclinkbuild = linkTo(methodOn(this.getClass()).getAllUsers());
 		objEntityModelUser.add(objwmvclinkbuild.withRel("all-users"));
 		return objEntityModelUser;
 
