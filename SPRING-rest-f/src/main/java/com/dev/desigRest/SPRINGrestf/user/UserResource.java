@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+//import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+//import org.springframework.hateoas.EntityModel;
+//import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,25 +31,33 @@ public class UserResource {
 	}
 
 	@GetMapping(path = "/users/{id}")
-	public EntityModel<User> getUserById(@PathVariable int id) {
+	public /*EntityModel<User>*/ User getUserById(@PathVariable int id) {
 		User og = obj.findOne(id);
 		if (null == og) {
 			throw new UserNotFoundException("no User found for id= " + id);
 		}
+		return og;
 
-		EntityModel<User> objEntityModelUser = new EntityModel<User>(og);
-		WebMvcLinkBuilder objwmvclinkbuild = linkTo(methodOn(this.getClass()).getAllUsers());
-		objEntityModelUser.add(objwmvclinkbuild.withRel("all-users"));
-		return objEntityModelUser;
+		/*
+		 * EntityModel<User> objEntityModelUser = new EntityModel<User>(og);
+		 * WebMvcLinkBuilder objwmvclinkbuild =
+		 * linkTo(methodOn(this.getClass()).getAllUsers());
+		 * objEntityModelUser.add(objwmvclinkbuild.withRel("all-users")); return
+		 * objEntityModelUser;
+		 */
 
 	}
 
 	@PostMapping(path = "/users")
-	public ResponseEntity<Object> cUSer(@Valid @RequestBody User user) {
+	public /*ResponseEntity<Object>*/ User cUSer(@Valid @RequestBody User user) {
 
 		User f = obj.save(user);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(f.getId()).toUri();
-		return ResponseEntity.created(location).build();
+		/*
+		 * URI location =
+		 * ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand
+		 * (f.getId()).toUri(); return ResponseEntity.created(location).build();
+		 */
+		return f;
 	}
 
 	@DeleteMapping(path = "/users/{id}")
